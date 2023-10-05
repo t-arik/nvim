@@ -8,7 +8,7 @@ if not vim.loop.fs_stat(lazypath) then
     "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
+    "--branch=stable",
     lazypath,
   })
 end
@@ -26,14 +26,14 @@ require("lazy").setup({
       "folke/neodev.nvim",
       "hrsh7th/nvim-cmp",
       "hrsh7th/cmp-nvim-lsp",
-      "L3MON4D3/LuaSnip"
+      "L3MON4D3/LuaSnip",
+      "rafamadriz/friendly-snippets",
+      "saadparwaiz1/cmp_luasnip",
     }
   },
   "morhetz/gruvbox",
-  "rose-pine/neovim",
   "nvim-treesitter/nvim-treesitter",
   "lewis6991/gitsigns.nvim",
-  "zbirenbaum/copilot.lua",
   {
     "nvim-lualine/lualine.nvim",
     opts = {
@@ -47,10 +47,13 @@ require("lazy").setup({
   { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
   { "folke/which-key.nvim", event = "VeryLazy", opts = {} },
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+  { "j-hui/fidget.nvim", tag = "legacy", event = "LspAttach" }
 })
 
 vim.cmd.colorscheme("gruvbox")
 -- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+-- vim.o.cursorline = true
+-- vim.o.colorcolumn = "100"
 vim.o.hlsearch = false
 vim.wo.number = true
 vim.o.breakindent = true
@@ -58,13 +61,15 @@ vim.o.undofile = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.updatetime = 50
-vim.o.timeoutlen = 500
+vim.o.timeoutlen = 2000
 vim.o.completeopt = "menuone,noselect"
 vim.wo.signcolumn = "yes"
 vim.o.termguicolors = true
--- vim.o.colorcolumn = "100"
 vim.o.scrolloff = 8
-vim.o.cursorline = true
+vim.o.tabstop = 4
+vim.o.softtabstop = 4
+vim.o.shiftwidth = 4
+vim.o.expandtab = true
 
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open diagnostic message" })
@@ -95,8 +100,6 @@ require("nvim-treesitter.configs").setup({
   ignore_install = {}
 })
 
-require("copilot").setup({})
-
 require("ibl").setup({ scope = { enabled = false }, })
 
 local nmap = function(keys, func, desc, bufnr)
@@ -104,6 +107,7 @@ local nmap = function(keys, func, desc, bufnr)
 end
 
 local ts = require("telescope.builtin")
+nmap("<leader><leader>", ts.builtin, "Telescope")
 nmap("<leader>ff", ts.find_files, "Find files")
 nmap("<leader>fg", ts.live_grep, "Live-Grep")
 nmap("<leader>fb", ts.buffers, "Find in Buffers")
@@ -117,6 +121,7 @@ nmap("<leader>tb", gs.toggle_current_line_blame, "Blame Inline Toggle")
 
 
 -- LSP ---
+require("fidget").setup()
 require("mason").setup()
 local on_attach = function(_, bufnr)
   local lspnmap = function(keys, func, desc)
@@ -142,7 +147,6 @@ end
 
 local servers = {
   clangd = {},
-  gopls = {},
   pyright = {},
   rust_analyzer = {},
   tsserver = {},
@@ -184,8 +188,8 @@ cmp.setup {
     end,
   },
   mapping = cmp.mapping.preset.insert {
-    ["<C-j>"] = cmp.mapping.select_next_item(),
-    ["<C-k>"] = cmp.mapping.select_prev_item(),
+    ["<C-n>"] = cmp.mapping.select_next_item(),
+    ["<C-p>"] = cmp.mapping.select_prev_item(),
     ["<C-Space>"] = cmp.mapping.complete {},
     ["<CR>"] = cmp.mapping.confirm { select = true, },
   },
