@@ -14,6 +14,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+  "github/copilot.vim",
   "neovim/nvim-lspconfig",
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
@@ -35,7 +36,7 @@ require("lazy").setup({
 })
 
 vim.cmd.colorscheme("gruvbox")
-vim.o.colorcolumn = "100"
+-- vim.o.colorcolumn = "80"
 vim.o.hlsearch = false
 vim.wo.number = true
 vim.o.breakindent = true
@@ -52,6 +53,7 @@ vim.o.tabstop = 4
 vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
+vim.g.copilot_enabled = false
 
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open diagnostic message" })
