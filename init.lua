@@ -15,24 +15,53 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   "github/copilot.vim",
-  "neovim/nvim-lspconfig",
-  "williamboman/mason.nvim",
-  "williamboman/mason-lspconfig.nvim",
-  'hrsh7th/cmp-nvim-lsp',
-  'hrsh7th/nvim-cmp',
-  "L3MON4D3/LuaSnip",
+  {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "williamboman/mason.nvim",
+    }
+  },
+  {
+    'hrsh7th/nvim-cmp',
+    dependencies = {
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+      'hrsh7th/cmp-nvim-lsp',
+      "rafamadriz/friendly-snippets"
+    }
+  },
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = { 'nvim-lua/plenary.nvim' }
+  },
   "nvim-treesitter/nvim-treesitter",
   "tpope/vim-commentary",
   "tpope/vim-sleuth",
-  "folke/neodev.nvim",
   "morhetz/gruvbox",
   "lewis6991/gitsigns.nvim",
   "nvim-lualine/lualine.nvim",
+  "folke/neodev.nvim",
   {
-    "nvim-telescope/telescope.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" }
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {}
   },
-  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+  {
+    "folke/trouble.nvim",
+    opts = {
+      icons = false,
+      fold_open = "", -- icon used for open folds
+      fold_closed = "", -- icon used for closed folds
+      signs = {
+        error = "E",
+        warning = "W",
+        hint = "H",
+        information = "I",
+        other = "O",
+      },
+    }
+  }
 })
 
 vim.cmd.colorscheme("gruvbox")
@@ -121,9 +150,10 @@ local servers = {
   pyright = {},
   rust_analyzer = {},
   tsserver = {},
-  html = {},
   lua_ls = {},
   elixirls = {},
+  html = { filetypes = { "html", "heex" } },
+  htmx = { filetypes = { "html", "heex" } },
 }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -150,19 +180,22 @@ require("mason-lspconfig").setup_handlers({
 })
 
 local cmp = require("cmp")
-local luasnip = require("luasnip")
-luasnip.config.setup({})
+require('luasnip').filetype_extend("heex", { "html" })
+require("luasnip.loaders.from_vscode").lazy_load()
 
 cmp.setup({
   snippet = {
     expand = function(args)
-      luasnip.lsp_expand(args.body)
+      require('luasnip').lsp_expand(args.body)
     end,
   },
-  mapping = cmp.mapping.preset.insert {
+  mapping = cmp.mapping.preset.insert({
     ["<C-n>"] = cmp.mapping.select_next_item(),
     ["<C-p>"] = cmp.mapping.select_prev_item(),
     ["<CR>"] = cmp.mapping.confirm { select = true, },
-  },
-  sources = { { name = "nvim_lsp" }, { name = "luasnip" }, },
+  }),
+  sources = cmp.config.sources({
+    { name = "nvim_lsp" },
+    { name = "luasnip" },
+  }),
 })
