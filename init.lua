@@ -12,7 +12,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = " "
-vim.o.colorcolumn = "100"
 vim.o.hlsearch = false
 vim.wo.number = true
 vim.o.breakindent = true
@@ -30,6 +29,7 @@ vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
 vim.g.copilot_enabled = true
+-- vim.o.colorcolumn = "100"
 
 require("keymaps")
 require("lazy").setup("plugins")
