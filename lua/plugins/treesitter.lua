@@ -12,7 +12,6 @@ return {
         "go",
         "python",
         "racket",
-        "markdown",
       },
       sync_install = false,
       highlight = {
