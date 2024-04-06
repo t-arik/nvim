@@ -1,7 +1,7 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-lspconfig = require('lspconfig')
+local lspconfig = require('lspconfig')
 
 local handlers = {
   function(server_name)
@@ -35,10 +35,8 @@ return {
         "gopls",
         "html",
         "pyright",
-        "rust_analyzer",
         "tsserver",
         "clangd",
-        "elixirls",
         "lua_ls",
       },
       handlers = handlers,
