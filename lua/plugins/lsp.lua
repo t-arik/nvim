@@ -33,10 +33,7 @@ return {
     opts = {
       ensure_installed = {
         "gopls",
-        "html",
         "pyright",
-        "tsserver",
-        "clangd",
         "lua_ls",
       },
       handlers = handlers,
@@ -45,7 +42,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      lspconfig.racket_langserver.setup{ capabilities = capabilities }
+      lspconfig.racket_langserver.setup { capabilities = capabilities }
       -- Global mappings.
       vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
       vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
