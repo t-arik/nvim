@@ -8,5 +8,4 @@ return {
     main = "ibl",
     opts = { scope = { enabled = false } }
   },
-  "github/copilot.vim",
 }

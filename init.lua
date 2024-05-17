@@ -29,7 +29,7 @@ vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
 vim.g.copilot_enabled = false
--- vim.o.colorcolumn = "100"
+vim.o.colorcolumn = "100"
 
 require("keymaps")
 require("lazy").setup("plugins")

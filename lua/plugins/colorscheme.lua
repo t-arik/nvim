@@ -1,7 +1,6 @@
 return {
   {
     "morhetz/gruvbox",
-    config = function() vim.cmd.colorscheme("rose-pine") end,
   },
   {
     "rose-pine/neovim",
@@ -10,6 +9,7 @@ return {
       styles = {
         italic = false,
       }
-    }
+    },
+    config = function() vim.cmd.colorscheme("rose-pine") end,
   }
 }
