@@ -8,4 +8,5 @@ return {
     main = "ibl",
     opts = { scope = { enabled = false } }
   },
+  "mbbill/undotree",
 }

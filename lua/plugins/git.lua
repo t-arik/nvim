@@ -1,12 +1,12 @@
-local nmap = function(keys, func, desc)
-  vim.keymap.set("n", keys, func, { desc = desc })
-end
-
 return {
   {
     "lewis6991/gitsigns.nvim",
     opts = {
-      on_attach = function(_bufnr)
+      on_attach = function(buffer)
+        local nmap = function(keys, func, desc)
+          vim.keymap.set("n", keys, func, { buffer = buffer, desc = desc })
+        end
+
         local gs = package.loaded.gitsigns
         nmap('<leader>hs', gs.stage_hunk)
         nmap('<leader>hr', gs.reset_hunk)
