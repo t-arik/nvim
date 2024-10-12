@@ -31,11 +31,6 @@ return {
     "williamboman/mason-lspconfig.nvim",
     dependencies = { "williamboman/mason.nvim" },
     opts = {
-      ensure_installed = {
-        "gopls",
-        "pyright",
-        "lua_ls",
-      },
       handlers = handlers,
     },
   },
