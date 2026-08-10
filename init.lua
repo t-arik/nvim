@@ -116,6 +116,7 @@ vim.pack.add({
   "https://github.com/neanias/everforest-nvim",
 })
 
+require('everforest').setup { background = "hard" }
 require('fzf-lua').setup { fzf_colors = true }
 require('mini.completion').setup {
   lsp_completion = {
@@ -137,6 +138,6 @@ require('mini.completion').setup {
 require('gitsigns').setup {}
 
 vim.cmd([[colorscheme everforest]])
---
+
 -- LSP Configs
 vim.lsp.enable('gopls')
