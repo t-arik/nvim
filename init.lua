@@ -42,9 +42,11 @@ vim.o.cursorline = true -- Highlight the line where the cursor is on.
 vim.o.scrolloff = 10 -- Keep this many screen lines above/below the cursor.
 -- vim.o.list = true -- Show <tab> and trailing spaces.
 
+vim.o.completeopt = 'menuone,noselect,fuzzy,nosort' -- Options for insert mode completion
+
 -- If performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
 -- instead raise a dialog asking if you wish to save the current file(s). See `:h 'confirm'`
-vim.o.confirm = true
+-- vim.o.confirm = true
 
 -- KEYMAPS
 --
@@ -98,6 +100,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- 'updatetime' and when going to insert mode.
 vim.cmd('packadd! nohlsearch')
 
+
+-- Enable TreeSitter by default
+vim.api.nvim_create_autocmd("FileType", {
+    callback = function(ev)
+		pcall(vim.treesitter.start, ev.buf)
+    end
+})
+
 -- Install third-party plugins via "vim.pack.add()".
 vim.pack.add({
   -- Quickstart configs for LSP
@@ -114,30 +124,22 @@ vim.pack.add({
   'https://github.com/nvim-treesitter/nvim-treesitter',
   -- Everforest color scheme
   "https://github.com/neanias/everforest-nvim",
+  -- Github Copilot LLM Autocompletion
+  'https://github.com/github/copilot.vim'
 })
 
 require('everforest').setup { background = "hard" }
 require('fzf-lua').setup { fzf_colors = true }
-require('mini.completion').setup {
-  lsp_completion = {
-    process_items = function(items, base)
-      local base_lower = base:lower()
-      local matches = vim.tbl_filter(function(item)
-        local filter_text = item.filterText or item.label
-        return vim.startswith(filter_text:lower(), base_lower)
-      end, items)
-
-      table.sort(matches, function(a, b)
-        return (a.sortText or a.label) < (b.sortText or b.label)
-      end)
-      return matches
-    end,
-  },
-}
+require('mini.completion').setup {}
 -- require('quicker').setup {}
 require('gitsigns').setup {}
 
 vim.cmd([[colorscheme everforest]])
 
+-- Disable copilot by default
+vim.g.copilot_enabled = false
+
 -- LSP Configs
 vim.lsp.enable('gopls')
+vim.lsp.enable('pyrefly')
+vim.lsp.enable('templ')

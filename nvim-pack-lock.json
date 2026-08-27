@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "copilot.vim": {
+      "rev": "a12fd5672110c8aa7e3c8419e28c96943ca179be",
+      "src": "https://github.com/github/copilot.vim"
+    },
     "everforest-nvim": {
       "rev": "a0e9edc57379e8feafc6ba207c26dbb12fc1b6d8",
       "src": "https://github.com/neanias/everforest-nvim"
@@ -15,6 +19,10 @@
     "mini.completion": {
       "rev": "d2a2b2a2b5350b713ade3bb744df39eee7d4229b",
       "src": "https://github.com/nvim-mini/mini.completion"
+    },
+    "mini.snippets": {
+      "rev": "050638170639ceb7bef4e804507cbf209e565b2c",
+      "src": "https://github.com/nvim-mini/mini.snippets"
     },
     "nvim-lspconfig": {
       "rev": "43ed3797b266e1ee8d222e491379ad471c9d3146",
