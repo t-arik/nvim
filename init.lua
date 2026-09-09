@@ -68,6 +68,13 @@ vim.keymap.set('n', '<leader>f', function()
     vim.lsp.buf.format()
   end, { desc = 'Format buffer' })
 
+-- vim.api.nvim_set_keymap("n", "<C-\\>", [[<Cmd>lua require"fzf-lua".buffers()<CR>]], {})
+-- vim.api.nvim_set_keymap("n", "<C-k>", [[<Cmd>lua require"fzf-lua".builtin()<CR>]], {})
+-- vim.api.nvim_set_keymap("n", "<C-p>", [[<Cmd>lua require"fzf-lua".files()<CR>]], {})
+vim.api.nvim_set_keymap("n", "<C-l>", [[<Cmd>lua require"fzf-lua".live_grep()<CR>]], {})
+vim.api.nvim_set_keymap("n", "<C-g>", [[<Cmd>lua require"fzf-lua".global()<CR>]], {})
+-- vim.api.nvim_set_keymap("n", "<F1>", [[<Cmd>lua require"fzf-lua".help_tags()<CR>]], {})
+
 -- AUTOCOMMANDS (EVENT HANDLERS)
 --
 -- See `:h lua-guide-autocommands`, `:h autocmd`, `:h nvim_create_autocmd()`
@@ -129,7 +136,7 @@ vim.pack.add({
 })
 
 require('everforest').setup { background = "hard" }
-require('fzf-lua').setup { fzf_colors = true }
+require('fzf-lua').setup {}
 require('mini.completion').setup {}
 -- require('quicker').setup {}
 require('gitsigns').setup {}
@@ -143,3 +150,6 @@ vim.g.copilot_enabled = false
 vim.lsp.enable('gopls')
 vim.lsp.enable('pyrefly')
 vim.lsp.enable('templ')
+vim.lsp.enable('tsc')
+vim.lsp.enable('html')
+
