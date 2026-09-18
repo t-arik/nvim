@@ -30,9 +30,9 @@ vim.o.number = true -- Show line numbers in a column.
 vim.o.signcolumn = 'yes'
 
 -- tab width
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
-vim.o.softtabstop = 4
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+vim.o.softtabstop = 2
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.o.ignorecase = true
@@ -73,6 +73,7 @@ vim.keymap.set('n', '<leader>f', function()
 -- vim.api.nvim_set_keymap("n", "<C-p>", [[<Cmd>lua require"fzf-lua".files()<CR>]], {})
 vim.api.nvim_set_keymap("n", "<C-l>", [[<Cmd>lua require"fzf-lua".live_grep()<CR>]], {})
 vim.api.nvim_set_keymap("n", "<C-g>", [[<Cmd>lua require"fzf-lua".global()<CR>]], {})
+vim.api.nvim_set_keymap("n", "<C-h>", [[<Cmd>lua require"fzf-lua".diagnostics_workspace()<CR>]], {})
 -- vim.api.nvim_set_keymap("n", "<F1>", [[<Cmd>lua require"fzf-lua".help_tags()<CR>]], {})
 
 -- AUTOCOMMANDS (EVENT HANDLERS)
