@@ -125,8 +125,6 @@ vim.pack.add({
   'https://github.com/ibhagwan/fzf-lua',
   -- Autocompletion
   'https://github.com/nvim-mini/mini.completion',
-  -- Enhanced quickfix/loclist
-  -- 'https://github.com/stevearc/quicker.nvim',
   -- Git integration
   'https://github.com/lewis6991/gitsigns.nvim',
   -- TreeSitter parser installer
@@ -134,13 +132,12 @@ vim.pack.add({
   -- Everforest color scheme
   "https://github.com/neanias/everforest-nvim",
   -- Github Copilot LLM Autocompletion
-  'https://github.com/github/copilot.vim'
+  'https://github.com/github/copilot.vim',
 })
 
 require('everforest').setup { background = "hard" }
 require('fzf-lua').setup {}
 require('mini.completion').setup {}
--- require('quicker').setup {}
 require('gitsigns').setup {}
 
 vim.cmd([[colorscheme everforest]])
@@ -154,4 +151,4 @@ vim.lsp.enable('pyrefly')
 vim.lsp.enable('templ')
 vim.lsp.enable('tsc')
 vim.lsp.enable('html')
-
+vim.lsp.enable('tinymist')
